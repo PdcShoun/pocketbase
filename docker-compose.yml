@@ -2,7 +2,7 @@ version: '3'
 
 services:
   pb:
-    image: shounnnn/pocketbase:dev
+    image: shounnnn/pocketbase:source
     ports:
       - 8080:8080
     volumes:

@@ -7,8 +7,8 @@ RUN git clone https://github.com/pocketbase/pocketbase
 
 FROM golang:1.22.0-alpine as builder
 
-COPY --from=clone /tmp/pocketbase/examples/base/ /tmp/builder/
-WORKDIR /tmp/builder/
+COPY --from=clone /tmp/pocketbase/ /tmp/pocketbase/
+WORKDIR /tmp/pocketbase/examples/base
 RUN CGO_ENABLED=0 go build
 
 FROM alpine:latest
@@ -18,4 +18,5 @@ COPY ./entrypoint.sh /pb/entrypoint.sh
 
 EXPOSE 8080
 # start PocketBase
-ENTRYPOINT ["/pb/entrypoint.sh"]
+# ENTRYPOINT ["/pb/entrypoint.sh"]
+CMD [ "/pb/pocketbase", "serve", "--http=0.0.0.0:8080" ]
