@@ -5,14 +5,17 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  test-secret:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: print secret
+        run: echo "my secret ${{ secrets.DOCKERHUB_USERNAME }}"
+
+  build-dev:
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: print secret
-        run: echo "my secret ${{ secrets.DOCKERHUB_USERNAME }}"
 
       - uses: mr-smithers-excellent/docker-build-push@v6
         name: Build & push Docker image DEV
@@ -23,6 +26,12 @@ jobs:
           dockerfile: Dockerfile
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+  build-source:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - uses: mr-smithers-excellent/docker-build-push@v6
         name: Build & push Docker image SOURCE
