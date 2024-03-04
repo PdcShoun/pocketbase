@@ -20,6 +20,9 @@ RUN unzip /tmp/pb.zip -d /pb/
 
 COPY ./entrypoint.sh /pb/entrypoint.sh
 
+# add volumn
+VOLUME ["/pb/pb_data"]
+# expose Pocketbase service
 EXPOSE 8080
 
 # start PocketBase

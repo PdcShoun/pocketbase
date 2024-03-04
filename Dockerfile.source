@@ -16,7 +16,12 @@ FROM alpine:latest
 COPY --from=builder /tmp/pocketbase/examples/base/base /pb/pocketbase
 COPY ./entrypoint.sh /pb/entrypoint.sh
 
+# expose Pocketbase service
 EXPOSE 8080
+
+# add volumn
+VOLUME ["/pb/pb_data"]
+
 # start PocketBase
 ENTRYPOINT [ "/pb/entrypoint.sh" ]
 CMD [ "pocketbase" ]
