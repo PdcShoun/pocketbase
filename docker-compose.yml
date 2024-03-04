@@ -3,6 +3,7 @@ version: '3'
 services:
   pb:
     image: shounnnn/pocketbase:source
+    container_name: pb
     ports:
       - 8080:8080
     volumes:
