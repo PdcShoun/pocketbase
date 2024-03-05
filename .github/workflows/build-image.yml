@@ -10,6 +10,9 @@ jobs:
     steps:
       - name: print secret
         run: echo "my secret ${{ secrets.DOCKERHUB_USERNAME }}"
+      
+      - name: print arch
+        run: echo "${{runner.os.lowercase}}_${{ runner.arch.lowercase }}"
 
   build-dev:
     runs-on: ubuntu-22.04
@@ -27,7 +30,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           multiPlatform: true
-          platform: linux/amd64,linux/arm64,linux/arm/v6
+          platform: linux/amd64,linux/arm64
 
   build-source:
     runs-on: ubuntu-22.04
@@ -45,4 +48,4 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           multiPlatform: true
-          platform: linux/amd64,linux/arm64,linux/arm/v6
+          platform: linux/amd64,linux/arm64
