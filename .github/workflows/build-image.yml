@@ -12,25 +12,7 @@ jobs:
         run: echo "my secret ${{ secrets.DOCKERHUB_USERNAME }}"
       
       - name: print arch
-        run: echo "${{runner.os.lowercase}}_${{ runner.arch.lowercase }}"
-
-  build-dev:
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - uses: mr-smithers-excellent/docker-build-push@v6
-        name: Build & push Docker image DEV
-        with:
-          image: ${{ secrets.DOCKERHUB_USERNAME }}/pocketbase
-          tags: dev
-          registry: docker.io
-          dockerfile: Dockerfile
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-          multiPlatform: true
-          platform: linux/amd64,linux/arm64
+        run: echo "${{ runner.os }}_${{ runner.arch }}"
 
   build-source:
     runs-on: ubuntu-22.04
