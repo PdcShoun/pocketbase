@@ -26,6 +26,8 @@ jobs:
           dockerfile: Dockerfile
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+          multiPlatform: true
+          platform: linux/amd64,linux/arm64,linux/arm/v6
 
   build-source:
     runs-on: ubuntu-22.04
@@ -42,3 +44,5 @@ jobs:
           dockerfile: Dockerfile.source
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+          multiPlatform: true
+          platform: linux/amd64,linux/arm64,linux/arm/v6
